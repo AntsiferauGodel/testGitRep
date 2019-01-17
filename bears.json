@@ -1,5 +1,6 @@
 {
-  "bears": [{
+  "bears": [
+    {
       "id": 1,
       "name": "Teddy",
       "type": "Brown",
@@ -52,6 +53,11 @@
       "id": 10,
       "name": "Kenai",
       "type": "Grizzly"
+    },
+    {
+      "id": 11,
+      "name": "Toporik",
+      "type": "Black"
     }
   ]
 }
