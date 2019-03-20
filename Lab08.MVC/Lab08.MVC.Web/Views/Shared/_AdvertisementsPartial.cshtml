@@ -1,0 +1,12 @@
+﻿<ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+        @Html.ActionLink("Advertisements", "Advertisements", "Home", null, new { @class = "nav-link"})
+    </li>
+    <li class="nav-item">
+        @using (Html.BeginForm("AdvertisementSearch", "Home", FormMethod.Post, new { @class = "form-inline my-2 my-lg-0" }))
+        {
+            @Html.TextBox("searchWord", null, new { @class = "form-control mr-sm-2" })
+            <input type="submit" value="Search" class="btn btn-outline-success" />
+        }
+    </li>
+</ul>

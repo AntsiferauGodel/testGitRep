@@ -1,0 +1,28 @@
+﻿@model Lab08.MVC.Business.Models.LoginModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-group" }))
+{
+    @Html.AntiForgeryToken()
+    <h3>Sign in</h3>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Login, new { @class = "col-md-2 col-form-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Login, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Login, "", new { @class = "text-danger" })
+        </div>
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 col-form-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <div class="col-md-10 mt-1">
+                <input type="submit" value="Log in" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+}

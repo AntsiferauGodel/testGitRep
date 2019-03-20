@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNet.Identity
+@model Lab08.MVC.Business.Models.AdvertisementView
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <h1>@Model.Header</h1>
+    <hr />
+    <div class="text-body">
+        @Model.Description
+    </div>
+    @if (Model.Pictures != null)
+    {
+        foreach (var item in Model.Pictures)
+        {
+            <img src="data:image;base64, @System.Convert.ToBase64String(item.Content)" class="img-thumbnail" width="200" />
+        }
+    }
+    <hr />
+    <div class="text-body">Price: @Model.Price</div>
+    @if (Model.OwnerId == User.Identity.GetUserId())
+    {
+        <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("AdvertisementEdit", "Home", new { advertisementId = Model.Id })'">Edit</button>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+            Remove
+        </button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Remove @Model.Header</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure that you want to remove @Model.Header ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("AdvertisementRemove", "Home", new { advertisementId = Model.Id })'">Remove</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNet.Identity
+@if (!Request.IsAuthenticated)
+{
+    <ul class="nav navbar-nav ">
+        <li class="d-md-inline pr-4">
+            @Html.ActionLink("Sign in", "Login", "Account")
+        </li>
+        <li class="d-md-inline pr-4">
+            @Html.ActionLink("Sign up", "Register", "Account")
+        </li>
+    </ul>
+}
+else
+{
+    <ul class="nav navbar-nav">
+        @if (User.IsInRole("Trader"))
+        {
+            <li class="nav-item">
+                @Html.ActionLink("Create advertisement", "AdvertisementCreate", "Home", null, new {@class= "btn btn-success" })
+            </li>
+        }
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@User.Identity.GetUserName()</a>
+            <div class="dropdown-menu" aria-labelby="navbarDropdownMenuLink">
+                @if (User.IsInRole("Trader"))
+                {
+                    @Html.ActionLink("Your advertisements", "AdvertisementsForCurrentUser", "Home", new { userId = User.Identity.GetUserId() }, new { @class = "dropdown-item" })
+                }
+                @Html.ActionLink("Profile", "ProfileDetails", "Account", new { userId = User.Identity.GetUserId() }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Log out", "Logout", "Account", "", new { @class = "dropdown-item" })
+            </div>
+        </li>
+    </ul>
+}

@@ -1,0 +1,45 @@
+﻿@model Lab08.MVC.Business.Models.UserRegisterModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-group" }))
+{
+    @Html.AntiForgeryToken()
+    <h3>User registration form</h3>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 col-form-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 col-form-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger"})
+        </div>
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 col-form-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 col-form-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+        </div>
+        @Html.LabelFor(m => m.RoleEnum, new { @class = "col-md-2 col-form-label" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(m => m.RoleEnum, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.RoleEnum, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="col-md-10 mt-1">
+            <input type="submit" value="Register" class="btn btn-primary" />
+        </div>
+    </div>
+}
